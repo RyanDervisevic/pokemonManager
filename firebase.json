@@ -1,0 +1,11 @@
+{
+  "hosting": {
+    "public": "dist/pokemon-manager",
+    "target": "pokemon-manager",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}

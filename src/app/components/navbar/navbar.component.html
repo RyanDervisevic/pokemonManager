@@ -1,0 +1,25 @@
+<nav class="navbar" role="navigation">
+    <div class="navbar-brand">
+        <a routerLink="" class="navbar-item">
+            <img src="./assets/images/pokemon.webp">
+        </a>
+    </div>
+
+    <div class="navbar-menu">
+        <div class="navbar-start" *ngIf="auth.user | async as user">
+            <a class="navbar-item" routerLink="/generations">Generations</a>
+            <a class="navbar-item" routerLink="/pokemons">Pokemons</a>
+        </div>
+
+        <div class="navbar-end">
+            <div class="navbar-item" *ngIf="auth.user | async as user; else showLogin">
+                <p class="mr-2">Hello {{ user.displayName }}</p>
+                <button class="button" (click)="logout()">Logout</button>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<ng-template #showLogin>
+    <button class="button navbar-item" (click)="login()">Login with Google</button>
+</ng-template>

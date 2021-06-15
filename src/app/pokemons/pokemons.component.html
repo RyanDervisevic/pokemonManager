@@ -1,0 +1,41 @@
+<div class="container" *ngIf="pokemons && apiResult$">
+  <h2>{{ 20 * (this.currentPage - 1) }} - {{ 20 * this.currentPage }} Pokemons out of {{ this.apiResult$.count }}</h2>
+  <div class="columns">
+    <div class="column is-two-thirds">
+      <p>In Pokedex order</p>
+      <form #form="ngForm">
+        <div class="field has-addons">
+          <div class="control">
+            <input class="input" type="text" name="search-pokemon" placeholder="Pokemon Name" [(ngModel)]="pokemonSearchForm"
+              (keyup)="search(pokemonSearchForm)" pattern="\w*" [class.is-danger]="form.invalid">
+            <p *ngIf="form.invalid" class="help is-danger">Search content must only contain letters</p>
+          </div>
+          <div class="control">
+            <button class="button is-primary" (click)="search(pokemonSearchForm)">
+              <span class="icon"><i class="fas fa-search"></i></span>
+              <span>Search</span>
+            </button>
+          </div>
+          <div class="control">
+            <button class="button" (click)="cancelSearch()">Cancel</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- List of Pokémon -->
+  <div class="columns is-multiline">
+    <ul class="menu-list column is-one-quarter" *ngFor="let pokemon of pokemons | paginate: { id: 'main-pokemon-list', itemsPerPage: 20, currentPage: currentPage, totalItems: apiResult$.count }">
+      <li> <app-pokemon [pokemon]="pokemon" (click)="onClick(pokemon)"></app-pokemon> </li>
+    </ul>
+    <div *ngIf="rickrolled">
+      <iframe src='https://gfycat.com/ifr/DigitalAcidicAndeancondor' allowfullscreen width='640' height='524'></iframe>
+    </div>
+  </div>
+
+  <!-- Pagination -->
+  <pagination-controls id="main-pokemon-list" (pageChange)="currentPage = $event; getPokemons(20 * (currentPage - 1))"
+                       directionLinks="true" autoHide="true" responsive="true" previousLabel="" nextLabel=""
+    ></pagination-controls>
+</div>

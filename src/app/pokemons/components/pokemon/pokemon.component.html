@@ -1,0 +1,10 @@
+<ul class="menu-list column" *ngIf="pokemon">
+    <img src="{{ pokemon.sprites.front_default }}" alt="{{ pokemon.name }}">
+    <a>{{ pokemon.name | titlecase }}</a>
+<!--    <li>Category: <span *ngIf="pokemon.category; else na">{{ pokemon.category }}</span> </li>-->
+    <li *ngIf="pokemon.types; else na">Types: <span *ngFor="let type of pokemon.types; let isLast = last">{{ type.type.name | titlecase }}{{ isLast ? '' : ', '}}</span></li>
+    <li>Height: <span *ngIf="pokemon.height; else na">{{ pokemon.height / 10 | number: '1.0-2' }} m</span> </li>
+    <li>Weight: <span *ngIf="pokemon.weight; else na">{{ pokemon.weight / 10 | number: '1.0-2' }} kg</span> </li>
+</ul>
+
+<ng-template #na>N/A</ng-template>

@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "serdok-pokemon-manager": {
+      "hosting": {
+        "pokemon-manager": [
+          "serdok-pokemon-manager"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "serdok-pokemon-manager"
+  }
+}
