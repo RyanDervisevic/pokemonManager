@@ -14,12 +14,17 @@
         <div class="navbar-end">
             <div class="navbar-item" *ngIf="auth.user | async as user; else showLogin">
                 <p class="mr-2">Hello {{ user.displayName }}</p>
-                <button class="button" (click)="logout()">Logout</button>
+                <button class="button is-danger" (click)="logout()">Logout</button>
             </div>
+        </div>
+    </div>
+    <div class="navbar-end">
+        <div class="navbar-menu">
+            <ng-template #showLogin>
+                <button class="button navbar-item is-primary" (click)="login()">Login</button>
+            </ng-template>
         </div>
     </div>
 </nav>
 
-<ng-template #showLogin>
-    <button class="button navbar-item" (click)="login()">Login with Google</button>
-</ng-template>
+
